@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appraisal agency</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/script.js" defer></script>
+</head>
+<body>
+
+
+<main>
+    <div  th:switch="${contracts}">
+        <div th:case="null"><span class="deals">Сделок не найдено</span></div>
+        <div th:case="*">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Объект</th>
+                    <th>Ценовые ожидания заказчика за продажу объекта,руб</th>
+                    <th>Стоимость предложенная оценщиком</th>
+                    <th>Стоимость оценки объекта</th>
+                    <th>Дата заключения договора</th>
+                    <th>Комментарий заказчика</th>
+                    <th>Комментарий оценщика</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each = "contract : ${contracts}">
+                    <td th:text="${contract.objectToAppraise.objectType.type}"></td>
+                    <td th:text="${contract.expectedPrice}"></td>
+                    <td th:text="${contract.appraiserPrice}"></td>
+                    <td th:text="${contract.priceForAppraisal}"></td>
+                    <td th:text="${contract.dateOfSigning}"></td>
+                    <td th:text="${contract.commentFromCustomer}"></td>
+                    <td th:text="${contract.commentFromAppraiser}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <form id="one" th:action="@{/customer/search}" method="post">
+                <input name="str" type="search" placeholder="Данные" class="input">
+                <button type="submit" class="input">Поиск</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+
+<div class="navbar">
+    <div class="navbar-panel">
+        <button class="close-menu">
+            <svg  width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L21 21M1 21L21 1" stroke="black"/>
+            </svg>
+        </button>
+
+        <nav class="navbar-menu">
+            <ul class="menu nav-button">
+                <li class="menu-item">
+                    <a href="/customer/newContract">
+                        <h3>Новый договор</h3>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/customer/customer-profile">
+                        <h3>Договоры на оценку недвижимости</h3>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="/customer/viewSearch">
+                        <h3>Просмотр и поиск</h3>
+                    </a>
+
+                </li>
+                <li class="menu-item">
+                    <a href="/customer/statistic">
+                        <h3>Статистика оцененных объектов</h3>
+                    </a>
+
+                </li>
+                <li class="menu-item">
+                    <a href="/customer/personalInfo">
+                        <h3>Персональные данные</h3>
+                    </a>
+
+                </li>
+                <li class="menu-item">
+                    <a href="/customer/feedback">
+                        <h3>Дать отзыв о качестве услуг</h3>
+                    </a>
+
+                </li>
+            </ul>
+
+            <div class="contacts">
+                <h2 class="title">CONTACTS</h2>
+                <ul id="contacts">
+                    <li>
+                        <img src="/assets/phone_icon.png" alt="phone" class="contacts-imgs">
+                        <span>+375 44 798 70 77 </span>
+                    </li>
+                    <li>
+                        <img src="/assets/emai_icon.png" alt="e-mail" class="contacts-imgs">
+                        <span>aleks.krutsko@gmail.com</span>
+                    </li>
+                    <li>
+                        <img src="/assets/telegram_icon.png" alt="telegram" class="contacts-imgs">
+                        <span>@Alexei_kr</span>
+                    </li>
+                </ul>
+            </div>
+            <a href="/">
+                <button type="submit" class="animated-button">
+                    Выйти
+                </button>
+            </a>
+        </nav>
+    </div>
+    <button class="menu-button">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.937476 9.37501H29.0624C29.58 9.37501 29.9999 8.95498 29.9999 8.43754C29.9999 7.92002 29.5799 7.50006 29.0624 7.50006H0.937476C0.419955 7.50006 0 7.92009 0 8.43754C0 8.95498 0.420033 9.37501 0.937476 9.37501Z" fill="black"/>
+            <path d="M29.0624 14.0626H0.937476C0.419955 14.0626 0 14.4826 0 15C0 15.5175 0.420033 15.9375 0.937476 15.9375H29.0624C29.58 15.9375 29.9999 15.5175 29.9999 15C29.9999 14.4826 29.58 14.0626 29.0624 14.0626Z" fill="black"/>
+            <path d="M29.0625 20.625H10.3125C9.79495 20.625 9.375 21.0451 9.375 21.5625C9.375 22.08 9.79503 22.5 10.3125 22.5H29.0625C29.58 22.5 29.9999 22.0799 29.9999 21.5625C30 21.045 29.58 20.625 29.0625 20.625Z" fill="black"/>
+        </svg>
+
+    </button>
+</div>
+
+</body>
+</html>
+
+
+
+

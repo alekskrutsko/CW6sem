@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Appraisal agency</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="/js/script.js" defer></script>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+
+        // Load the Visualization API and the corechart package.
+        google.charts.load('current', {'packages':['corechart']});
+
+        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.setOnLoadCallback(drawChart);
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawChart() {
+
+            // Create the data table.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'month');
+            data.addColumn('number', 'Прибыль');
+            data.addRows([
+                /*[# th:each="row : ${chartData}"]*/
+                [[${row}]],
+                /*[/]*/
+            ]);
+
+            // Set chart options
+            var options = {
+                title: 'Статистика прибыли за полугодие',
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                width:1000,
+                height:600,
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
+    </script>
+    <style>
+        h4{
+            font-family: 'Lexend', sans-serif;
+            font-size: 15px;
+            padding-bottom: 5px;
+            padding-left: 200px;
+        }
+        p{
+            font-family: 'Lexend', sans-serif;
+            font-size: 17px;
+            font-weight: bolder;
+            padding-left: 200px;
+        }
+        .div{
+            margin-left: 500px;
+        }
+        body{
+            overflow: hidden;
+        }
+        .animated-button1{
+            margin-left: 1500px;
+        }
+        .menu-item{
+            margin-top: 35px;
+        }
+    </style>
+</head>
+<body>
+<div class="div">
+    <div id="chart_div"></div>
+    <div>
+        <p>Топ-2 лучших оценщиков</p>
+        <h4 th:text="${appraisers[0]}" class="bestAppraisers"></h4>
+        <h4 th:text="${appraisers[1]}" class="bestAppraisers"></h4>
+    </div>
+</div>
+<div>
+    <p style="position: absolute; top:550px; right: 190px; width:430px;" th:text="${report}"></p>
+    <a th:href = "@{/admin/report}"><button class="animated-button animated-button1">Сгенерировать отчёт</button></a>
+</div>
+<div class="navbar" >
+    <div class="navbar-panel">
+        <button class="close-menu">
+            <svg  width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L21 21M1 21L21 1" stroke="black"/>
+            </svg>
+        </button>
+
+        <nav class="navbar-menu">
+            <ul class="menu nav-button">
+                <li class="menu-item">
+                    <a href="/admin/admin-profile">
+                        <h3>Управление пользователями</h3>
+                    </a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="/admin/lockUnlock">
+                        <h3>Блокировка/разблокировка пользователей</h3>
+                    </a>
+
+                </li>
+                <li class="menu-item">
+                    <a href="/admin/statistic">
+                        <h3 style="padding: 14px 0;">Отчёт о деятельности компании</h3>
+                    </a>
+                </li>
+                <li class="menu-item personalInfo">
+                    <a href="/admin/personalInfo">
+                        <h3 >Персональные данные</h3>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="contacts">
+                <h2 class="title">CONTACTS</h2>
+                <ul id="contacts">
+                    <li>
+                        <img src="/assets/phone_icon.png" alt="phone" class="contacts-imgs">
+                        <span>+375 44 798 70 77 </span>
+                    </li>
+                    <li>
+                        <img src="/assets/emai_icon.png" alt="e-mail" class="contacts-imgs">
+                        <span>aleks.krutsko@gmail.com</span>
+                    </li>
+                    <li>
+                        <img src="/assets/telegram_icon.png" alt="telegram" class="contacts-imgs">
+                        <span>@Alexei_kr</span>
+                    </li>
+                </ul>
+            </div>
+            <a href="/">
+                <button type="submit" class="animated-button">
+                    Выйти
+                </button>
+            </a>
+        </nav>
+    </div>
+    <button class="menu-button">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.937476 9.37501H29.0624C29.58 9.37501 29.9999 8.95498 29.9999 8.43754C29.9999 7.92002 29.5799 7.50006 29.0624 7.50006H0.937476C0.419955 7.50006 0 7.92009 0 8.43754C0 8.95498 0.420033 9.37501 0.937476 9.37501Z" fill="black"/>
+            <path d="M29.0624 14.0626H0.937476C0.419955 14.0626 0 14.4826 0 15C0 15.5175 0.420033 15.9375 0.937476 15.9375H29.0624C29.58 15.9375 29.9999 15.5175 29.9999 15C29.9999 14.4826 29.58 14.0626 29.0624 14.0626Z" fill="black"/>
+            <path d="M29.0625 20.625H10.3125C9.79495 20.625 9.375 21.0451 9.375 21.5625C9.375 22.08 9.79503 22.5 10.3125 22.5H29.0625C29.58 22.5 29.9999 22.0799 29.9999 21.5625C30 21.045 29.58 20.625 29.0625 20.625Z" fill="black"/>
+        </svg>
+
+    </button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appraisal Agency</title>
+    <link rel="stylesheet" href="/css/auths.css">
+    <script src="/js/auth.js" defer></script>
+    <style>
+        .error{
+            background-color: #fffcfc;
+            position: absolute;
+            z-index: 50;
+            top: 45%;
+            left: 13%;
+            padding: 0.4rem;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+<div th:class="${error} ? error : ''">
+    <h4 th:text="${error}"></h4>
+</div>
+    <div class="sign-in">
+        <h1 align="center">
+            <span>Войти в Аккаунт</span>
+        </h1>
+        <form th:action="@{/mainWindow}" th:object="${user}" class="form" name="form2" id="form2" method="post">
+            <input type="email" th:field="*{login}" required="required" id="em" placeholder="Email" class="input" />
+            <input type="password" th:field="*{password}" required="required"  placeholder="Пароль" class="input" />
+
+            <button id="first-btn" type="submit" class="animated-button">
+                Войти
+            </button>
+
+            <button type="button" class="animated-button">
+                <a class="register">
+                    Регистрация
+                </a>
+            </button>
+        </form>
+
+    </div>
+
+
+
+    <div class="sign-up">
+        <h1 align="center">
+            <span>Создание аккаунта</span>
+        </h1>
+        <form th:action="@{/create-customer}" th:object="${user}" method="post">
+            <input type="text" required="required" th:field="*{firstName}" id="name" placeholder="Имя" class="input">
+            <input type="text" required="required" th:field="*{surname}" id="surname" placeholder="Фамилия" class="input">
+            <input type="text" required="required" th:field="*{patronymic}" id="patronymic" placeholder="Отчество" class="input">
+            <input type="text" required="required" th:field="*{phone}" id="phone" placeholder="Телефон" class="input">
+            <input type="text" required="required" th:field="*{login}" id="email" placeholder="E-mail" class="input">
+            <input type="password" required="required" th:field="*{password}" placeholder="Пароль" class="input">
+        
+            <button id="second-btn" type="submit" class="animated-button">
+                Регистрация
+            </button>
+
+            <button type="button" class="animated-button">
+                <a class="enter">
+                    Авторизация
+                </a>
+            </button>
+        </form>
+
+    </div>
+</body>
+</html>
