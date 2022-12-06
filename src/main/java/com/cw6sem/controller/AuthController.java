@@ -1,18 +1,20 @@
 package com.cw6sem.controller;
 
 
-import com.cw6sem.entity.Appraiser;
-import com.cw6sem.service.AdminService;
-import com.cw6sem.service.UserService;
-import com.cw6sem.validators.ErrorCase;
 import com.cw6sem.domain.Role;
 import com.cw6sem.entity.AppraisalAgreement;
+import com.cw6sem.entity.Appraiser;
 import com.cw6sem.entity.User;
+import com.cw6sem.service.AdminService;
 import com.cw6sem.service.AppraisalAgreementService;
 import com.cw6sem.service.CustomerService;
+import com.cw6sem.service.UserService;
+import com.cw6sem.validators.ErrorCase;
 import com.cw6sem.validators.Validation;
-import static com.cw6sem.validators.ErrorCase.errorMsg;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +22,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+import static com.cw6sem.validators.ErrorCase.errorMsg;
+
 @Controller
 @AllArgsConstructor
 public class AuthController {
     private final UserService userService;
-    private final CustomerService customerService;
     private final AppraisalAgreementService appraisalAgreementService;
     private final AdminService adminService;
     public static User loggedUser;
@@ -67,8 +70,8 @@ public class AuthController {
     }
 
 
-    @PostMapping("/create-customer")
-    public String createCustomer(User user){
+    @PostMapping("/register")
+    public String register(User user){
         if(userService.findByLogin(user.getLogin() )!= null){
             errorMsg = ErrorCase.userExists();
             return "redirect:/auth-error";
@@ -91,7 +94,7 @@ public class AuthController {
             return "redirect:/auth-error";
         }
         user.setRole(Role.CUSTOMER);
-        customerService.saveUser(user);
+        userService.saveUser(user);
         loggedUser = user;
         return "/customer/profile";
     }

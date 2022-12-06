@@ -6,22 +6,52 @@ import com.cw6sem.repository.UserRepository;
 import com.mysql.cj.util.StringUtils;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+
+
+    private UserDetailsService userDetailsService;
 
     public User findByEmailAndPassword(String email, String password){
         User user = userRepository.findByLoginAndBlocked(email, false);
         if(user == null) return null;
-        if (BCrypt.checkpw(password, user.getPassword())) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
+
+        authenticationManager.authenticate(authenticationToken);
+        if(authenticationToken.isAuthenticated()){
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             return user;
         }
+
         return null;
     }
+    public User saveUser(User user){
+        String hashed = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashed);
+        userRepository.save(user);
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getLogin());
+        UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(userDetails, user.getPassword(), userDetails.getAuthorities());
 
+        if(authenticationToken.isAuthenticated()){
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        }
+        return user;
+    }
     public User findByLogin(String email){
         return userRepository.findByLogin(email);
     }

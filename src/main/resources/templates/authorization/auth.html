@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appraisal Agency</title>
-    <link rel="stylesheet" href="/css/auths.css">
-    <script src="/js/auth.js" defer></script>
+    <link rel="stylesheet" href="/resources/static/css/auths.css">
+    <script src="/resources/static/js/auth.js" defer></script>
     <style>
         .error{
             background-color: #fffcfc;
@@ -50,7 +50,7 @@
         <h1 align="center">
             <span>Создание аккаунта</span>
         </h1>
-        <form th:action="@{/create-customer}" th:object="${user}" method="post">
+        <form th:action="@{/register}" th:object="${user}" method="post">
             <input type="text" required="required" th:field="*{firstName}" id="name" placeholder="Имя" class="input">
             <input type="text" required="required" th:field="*{surname}" id="surname" placeholder="Фамилия" class="input">
             <input type="text" required="required" th:field="*{patronymic}" id="patronymic" placeholder="Отчество" class="input">

@@ -10,6 +10,7 @@ import com.cw6sem.validators.Validation;
 import static com.cw6sem.validators.ErrorCase.errorMsg;
 import com.mysql.cj.util.StringUtils;
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/admin")
+@PreAuthorize("hasAuthority('ADMINISTRATOR')")
 @AllArgsConstructor
 public class AdminController {
     private final AdminService adminService;

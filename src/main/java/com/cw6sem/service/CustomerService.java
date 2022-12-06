@@ -9,6 +9,7 @@ import com.cw6sem.repository.ObjectToAppraiseRepository;
 import com.cw6sem.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -39,14 +40,6 @@ public class CustomerService {
         appraisalAgreement.setStatus(Status.WAITFORAPPRAISER);
         appraisalAgreement.setCustomer(userRepository.findByLogin(loggedUser));
         appraisalAgreementRepository.save(appraisalAgreement);
-    }
-
-    public User saveUser(User user){
-
-
-        String hashed = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12));
-        user.setPassword(hashed);
-        return userRepository.save(user);
     }
 
     public List<List<Object>> getBarChart(){
