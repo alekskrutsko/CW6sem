@@ -9,14 +9,22 @@
     <link rel="stylesheet" href="/resources/static/css/tabs.css">
     <script src="/resources/static/js/script.js" defer></script>
 <style>
+    body{
+        background-size: cover;
+        background: url("/../../../resources/static/assets/background_personalInfo.jpg") no-repeat;
+        font-size: 18px;
+    }
     table{
-    padding-top: 25px;
+        padding-top: 25px;
     }
     .form{
     margin-top: 35px;
     }
     .fm{
     margin-top: 20px;
+    }
+    .transform{
+        background: url("/../../../resources/static/assets/background_personalInfo2.jpg") no-repeat;
     }
     .error{
         background-color: #fffcfc;
@@ -29,6 +37,7 @@
     }
     .tabs{
         max-width: 450px;
+        backdrop-filter: blur(8px);
     }
     </style>
 </head>
@@ -38,9 +47,9 @@
 </div>
 
 <div class="tabs">
-    <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked>
+    <input type="radio" name="tab-btn" id="tab-btn-1" value="" checked onclick="myFunction1()">
     <label for="tab-btn-1">Работа с типами<br> объектов</label>
-    <input type="radio" name="tab-btn" id="tab-btn-2" value="">
+    <input type="radio" name="tab-btn" id="tab-btn-2" value="" onclick="myFunction()">
     <label for="tab-btn-2">Работа с<br> объектами недвижимости</label>
 
     <div id="content-1">
@@ -243,6 +252,15 @@
 <script>
     let login = document.querySelector("#login");
     login.value = localStorage.getItem("login");
+
+    function myFunction() {
+        let body = document.querySelector("body")
+        body.classList.add("transform");
+    }
+    function myFunction1() {
+        let body = document.querySelector("body")
+        body.classList.remove("transform");
+    }
 </script>
 </body>
 </html>

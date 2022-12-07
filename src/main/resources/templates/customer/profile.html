@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="/resources/static/css/styles.css">
     <script src="/resources/static/js/script.js" defer></script>
     <style>
+        body{
+            background-size: cover;
+            background: url("/../../../resources/static/assets/background_personalInfo.jpg") no-repeat;
+            background-size: 100%;
+            font-size: 18px;
+        }
         .error{
             background-color: #fffcfc;
             position: absolute;
@@ -35,6 +41,7 @@
                                     <th>Описание</th>
                                     <th>Ценовые ожидания заказчика за продажу объекта,руб</th>
                                     <th>Стоимость предложенная оценщиком</th>
+                                    <th>Оценщик</th>
                                     <th>Статус</th>
                                 </tr>
                                 </thead>
@@ -44,6 +51,7 @@
                                     <td th:text="${contract.objectToAppraise.description}"></td>
                                     <td th:text="${contract.expectedPrice}"></td>
                                     <td th:text="${contract.appraiserPrice}"></td>
+                                    <td th:text="${contract.appraiser.user.login}"></td>
                                     <td th:text="${contract.strStatus}"></td>
                                     <td><button class="btn"><a th:href = "@{/customer/sign/{id} (id=${contract.id})}">Подписать</a></button></td>
                                     <td><button class="btn"><a th:href = "@{/customer/terminate/{id} (id=${contract.id})}">Расторгнуть</a></button></td>

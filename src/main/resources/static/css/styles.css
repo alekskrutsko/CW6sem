@@ -222,6 +222,7 @@ main{
 #login{
     background-color: transparent;
     border: none;
+    font-size: 18px;
 }
 .input{
     background-color: #fff;
