@@ -31,7 +31,7 @@ public class CustomerController {
     private final AppraiserService appraiserService;
     private final AdminService adminService;
     private final AppraisalAgreementService appraisalAgreementService;
-    private final ObjectToAppraiseServiсe objectToAppraiseServiсe;
+    private final ObjectToAppraiseService objectToAppraiseService;
 
     @GetMapping("/customer-profile")
     public String profile(Model model){
@@ -85,14 +85,14 @@ public class CustomerController {
 
     @GetMapping("/newContract")
     public String newContract(Model model, AppraisalAgreement appraisalAgreement){
-        List<ObjectToAppraise> objectsToAppraise = objectToAppraiseServiсe.findAll();
+        List<ObjectToAppraise> objectsToAppraise = objectToAppraiseService.findAll();
         model.addAttribute("objectsToAppraise",objectsToAppraise);
         return "/customer/newContract";
     }
     @PostMapping("/createContract")
     public String createContract(@RequestParam("login")String loggedUser,@RequestParam("expPrice") String expectedPrice, AppraisalAgreement appraisalAgreement, Model model){
         if(!Validation.validateDouble(expectedPrice)){
-            List<ObjectToAppraise> objectsToAppraise = objectToAppraiseServiсe.findAll();
+            List<ObjectToAppraise> objectsToAppraise = objectToAppraiseService.findAll();
             model.addAttribute("objectsToAppraise",objectsToAppraise);
             model.addAttribute("error",ErrorCase.errorDouble());
             return "/customer/newContract";

@@ -12,7 +12,6 @@
         body{
             background-size: cover;
             background: url("/../../../resources/static/assets/background_personalInfo2.jpg") no-repeat;
-            background-size: 100%;
             font-size: 18px;
         }
         .tabs{
@@ -60,7 +59,7 @@
                 <div class="field">
                     <label class="label" for="appraiserPrice">Результат расчёта метода, если поле пустое -<br>
                         значит схожих объектов нет в базе:</label>
-                    <input type="text" th:value="${priceFromAppraiser}" name="priceFromAppraiser" class="input" id="appraiserPrice" placeholder="Результат расчёта" value="" required>
+                    <input type="text" th:field="*{appraiserPrice}" name="priceFromAppraiser" class="input" id="appraiserPrice" placeholder="Результат расчёта" value="" required>
                 </div>
                 <div class="field">
                     <label class="label" for="priceForAppraisal">Введите стоимость услуг по оценке объекта:</label>

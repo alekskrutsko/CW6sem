@@ -29,7 +29,7 @@ public class AppraiserController {
     private final AppraiserService appraiserService;
     private final UserService userService;
     private final AppraisalAgreementService appraisalAgreementService;
-    private final ObjectToAppraiseServiсe objectToAppraiseServiсe;
+    private final ObjectToAppraiseService objectToAppraiseService;
     private final ObjectTypeService objectTypeService;
 
     @GetMapping("/appraiser-profile")
@@ -57,7 +57,6 @@ public class AppraiserController {
 
         AppraisalAgreement appraisalAgreement = appraisalAgreementService.countStatById(id);
         model.addAttribute("appraisalAgreement",appraisalAgreement);
-        model.addAttribute("priceFromAppraiser", appraisalAgreement.getAppraiserPrice().toString());
         return "/appraiser/method";
     }
 
@@ -167,7 +166,7 @@ public class AppraiserController {
     }
     @GetMapping("/objectsToAppraise")
     public String objectsToAppraise(Model model){
-        List<ObjectToAppraise> objectsToAppraise = objectToAppraiseServiсe.findAll();
+        List<ObjectToAppraise> objectsToAppraise = objectToAppraiseService.findAll();
         List<ObjectType> objectsTypes = objectTypeService.findAll();
         model.addAttribute("objectsToAppraise",objectsToAppraise);
         model.addAttribute("objectsTypes",objectsTypes);
@@ -194,18 +193,18 @@ public class AppraiserController {
 
     @PostMapping("/addObjectToAppraise")
     public String addObjectToAppraise(@ModelAttribute ObjectToAppraise objectToAppraise){
-        Optional<ObjectToAppraise> q = Optional.ofNullable(objectToAppraiseServiсe.findByTypeAndDescription(objectToAppraise));
+        Optional<ObjectToAppraise> q = Optional.ofNullable(objectToAppraiseService.findByTypeAndDescription(objectToAppraise));
         if(q.isPresent()){
             errorMsg = ErrorCase.suchObjectExists();
             return "redirect:/appraiser/type-error";
         }
-        objectToAppraiseServiсe.save(objectToAppraise);
+        objectToAppraiseService.save(objectToAppraise);
         return "redirect:/appraiser/objectsToAppraise";
     }
 
     @PostMapping("/alterObject")
     public String alterObjectToAppraise(ObjectToAppraise objectToAppraise){
-        objectToAppraiseServiсe.updateObject(objectToAppraise.getId(), objectToAppraise.getDescription());
+        objectToAppraiseService.updateObject(objectToAppraise.getId(), objectToAppraise.getDescription());
         return "redirect:/appraiser/objectsToAppraise";
     }
     @GetMapping("/deleteType/{id}")
@@ -218,7 +217,7 @@ public class AppraiserController {
     }
     @GetMapping("/deleteObject/{id}")
     public String deleteObject(@PathVariable("id") Long id){
-        if(objectToAppraiseServiсe.deleteObject(id)){
+        if(objectToAppraiseService.deleteObject(id)){
             return "redirect:/appraiser/objectsToAppraise";
         }
         errorMsg = ErrorCase.thisObjectIsUsedInAnotherTable();
@@ -228,7 +227,7 @@ public class AppraiserController {
     @GetMapping("/type-error")
     public String typeError(Model model){
         model.addAttribute("error",errorMsg);
-        List<ObjectToAppraise> objectsToAppraise = objectToAppraiseServiсe.findAll();
+        List<ObjectToAppraise> objectsToAppraise = objectToAppraiseService.findAll();
         List<ObjectType> objectsTypes = objectTypeService.findAll();
         model.addAttribute("objectsToAppraise",objectsToAppraise);
         model.addAttribute("objectsTypes",objectsTypes);

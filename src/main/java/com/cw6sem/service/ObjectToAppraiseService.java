@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class ObjectToAppraiseServiсe {
+public class ObjectToAppraiseService {
     private  final ObjectToAppraiseRepository objectToAppraiseRepository;
     private final ObjectTypeRepository objectTypeRepository;
     private final AppraisalAgreementRepository appraisalAgreementRepository;
@@ -31,8 +31,6 @@ public class ObjectToAppraiseServiсe {
         return false;
     }
     public ObjectToAppraise findByTypeAndDescription(ObjectToAppraise objectToAppraise){
-        System.out.println(objectToAppraise.getObjectType().getType());
-        System.out.println(objectToAppraise.getDescription());
         return objectToAppraiseRepository.findByTypeIdAndDescription(objectToAppraise.getObjectType().getType(), objectToAppraise.getDescription());
     }
     public void updateObject(Long id, String description){
