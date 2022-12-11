@@ -11,7 +11,7 @@
         body{
             overflow: hidden;
             background-size: cover;
-            background: url("/../../../resources/static/assets/background_personalInfo.jpg") no-repeat;
+            background: url("/../../../resources/static/assets/background1.jpg") no-repeat;
             font-size: 18px;
         }
          .error{
@@ -36,32 +36,37 @@
 
         <form th:action="@{/appraiser/updatePersonalInfo}" th:object="${user}" method="post">
 
-            <div class="field">
-            <label for="email" class="label">Логин(email)</label>
-            <input type="text" th:field="*{login}" id="email" placeholder="Логин" value="" class="input">
-            </div>
-            <div class="field">
-            <label for="password" class="label">Пароль</label>
-            <input type="password" th:field="*{password}" id="password" placeholder="Пароль" value="" class="input">
-            </div>
-            <div class="field">
-            <label for="firstName" class="label">Имя</label>
-            <input type="text" th:field="*{firstName}" id="firstName" placeholder="Имя" value="" class="input">
-            </div>
-            <div class="field">
-            <label for="surname" class="label">Фамилия</label>
-            <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия" class="input">
-            </div>
-            <div class="field">
-            <label for="patronymic" class="label">Отчество</label>
-            <input type="text" th:field="*{patronymic}" id="patronymic" placeholder="Отчество" class="input">
-            </div>
-            <div class="field">
-            <label for="phone" class="label">Номер телефона</label>
-            <input type="text" th:field="*{phone}" id="phone" placeholder="Номер телефона" class="input">
-            </div>
-
-            <button type="submit" class="input" id="update">Обновить</button>
+            <table>
+                <caption>Персональные данные</caption>
+                <tr>
+                    <td class="field">
+                        <label for="email" class="label">Логин(email)</label>
+                        <input type="text" th:field="*{login}" id="email" placeholder="Логин" value="" class="input">
+                    </td></tr>
+                <tr> <td class="field">
+                    <label for="password" class="label">Пароль</label>
+                    <input type="password" th:field="*{password}" id="password" placeholder="Пароль" value="" class="input">
+                </td></tr>
+                <tr><td class="field">
+                    <label for="firstName" class="label">Имя</label>
+                    <input type="text" th:field="*{firstName}" id="firstName" placeholder="Имя" value="" class="input">
+                </td></tr>
+                <tr> <td class="field">
+                    <label for="surname" class="label">Фамилия</label>
+                    <input type="text" th:field="*{surname}" id="surname" placeholder="Фамилия" class="input">
+                </td></tr>
+                <tr><td class="field">
+                    <label for="patronymic" class="label">Отчество</label>
+                    <input type="text" th:field="*{patronymic}" id="patronymic" placeholder="Отчество" class="input">
+                </td></tr>
+                <tr><td class="field">
+                    <label for="phone" class="label">Номер телефона</label>
+                    <input type="text" th:field="*{phone}" id="phone" placeholder="Номер телефона" class="input">
+                </td></tr>
+                <tr>
+                    <td><button type="submit" class="input" id="update">Обновить</button></td>
+                </tr>
+            </table>
         </form>
     </div>
 </main>
@@ -70,9 +75,7 @@
 <div class="navbar" >
     <div class="navbar-panel">
         <button class="close-menu">
-            <svg  width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1 1L21 21M1 21L21 1" stroke="black"/>
-            </svg>
+            <img class="menu-img" src="/resources/static/assets/close-btn.svg">
         </button>
 
         <nav class="navbar-menu">
@@ -126,12 +129,7 @@
         </nav>
     </div>
     <button class="menu-button">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0.937476 9.37501H29.0624C29.58 9.37501 29.9999 8.95498 29.9999 8.43754C29.9999 7.92002 29.5799 7.50006 29.0624 7.50006H0.937476C0.419955 7.50006 0 7.92009 0 8.43754C0 8.95498 0.420033 9.37501 0.937476 9.37501Z" fill="black"/>
-            <path d="M29.0624 14.0626H0.937476C0.419955 14.0626 0 14.4826 0 15C0 15.5175 0.420033 15.9375 0.937476 15.9375H29.0624C29.58 15.9375 29.9999 15.5175 29.9999 15C29.9999 14.4826 29.58 14.0626 29.0624 14.0626Z" fill="black"/>
-            <path d="M29.0625 20.625H10.3125C9.79495 20.625 9.375 21.0451 9.375 21.5625C9.375 22.08 9.79503 22.5 10.3125 22.5H29.0625C29.58 22.5 29.9999 22.0799 29.9999 21.5625C30 21.045 29.58 20.625 29.0625 20.625Z" fill="black"/>
-        </svg>
-
+        <img class="menu-img" src="/resources/static/assets/burger.svg">
     </button>
 </div>
 <script>

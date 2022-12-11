@@ -57,6 +57,7 @@ public class AppraiserController {
 
         AppraisalAgreement appraisalAgreement = appraisalAgreementService.countStatById(id);
         model.addAttribute("appraisalAgreement",appraisalAgreement);
+        model.addAttribute("priceFromAppraiser", appraisalAgreement.getAppraiserPrice() != null ? appraisalAgreement.getAppraiserPrice().toString() : "");
         return "/appraiser/method";
     }
 
@@ -240,7 +241,7 @@ public class AppraiserController {
         if(!Validation.validateDouble(appraiserPrice) || !Validation.validateDouble(priceForAppraisal)){
             AppraisalAgreement agreement = appraisalAgreementService.countStatById(appraisalAgreement.getId());
             model.addAttribute("appraisalAgreement", agreement);
-            model.addAttribute("priceFromAppraiser", agreement.getAppraiserPrice().toString());
+            model.addAttribute("priceFromAppraiser", agreement.getAppraiserPrice() != null ? agreement.getAppraiserPrice().toString() : "");
             model.addAttribute("error",ErrorCase.errorDouble());
             return "/appraiser/method";
 
@@ -255,7 +256,7 @@ public class AppraiserController {
         if(!Validation.validateDouble(income) || !Validation.validateDouble(capital) || !Validation.validateDouble(priceForAppraisal)){
             AppraisalAgreement agreement = appraisalAgreementService.countStatById(appraisalAgreement.getId());
             model.addAttribute("appraisalAgreement", agreement);
-            model.addAttribute("priceFromAppraiser", agreement.getAppraiserPrice().toString());
+            model.addAttribute("priceFromAppraiser", agreement.getAppraiserPrice() != null ? agreement.getAppraiserPrice().toString() : "");
             model.addAttribute("error",ErrorCase.errorDouble());
             return "/appraiser/method";
 

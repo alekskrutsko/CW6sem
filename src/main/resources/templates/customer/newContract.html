@@ -10,7 +10,7 @@
     <style>
         body{
             background-size: cover;
-            background: url("/../../../resources/static/assets/background_personalInfo.jpg") no-repeat;
+            background: url("/../../../resources/static/assets/background3.jpg") no-repeat;
             font-size: 18px;
         }
         .input{
@@ -21,9 +21,17 @@
             position: absolute;
             z-index: 50;
             top: 30%;
-            left: 13%;
+            left: 10%;
             padding: 0.4rem;
             max-width: 400px;
+        }
+        form{
+            padding: 15px;
+            border-top: 3px solid #415d73;
+            border-left: 3px solid #415d73;
+            border-right: 3px solid #f5a781;
+            border-bottom: 3px solid #f5a781;
+            backdrop-filter: blur(8px);
         }
     </style>
 </head>
@@ -33,10 +41,11 @@
 </div>
 <div class="content">
 
-        <div  th:switch="${objectsToAppraise}">
+        <div class="table" th:switch="${objectsToAppraise}">
             <div th:case="null"><span class="deals">Доступных объектов для оценки не найдено не найдено</span></div>
             <div th:case="*">
-                <table class="table">
+                <table>
+                    <caption>Доступные объекты для оценки</caption>
                     <thead>
                     <tr>
                         <th>ID</th>
@@ -77,8 +86,6 @@
                 <button  type="submit" class="input">Отправить заявку на рассмотрение</button>
                 </div>
             </form>
-
-
         </div>
 
 
@@ -86,9 +93,7 @@
     <div class="navbar">
         <div class="navbar-panel">
             <button class="close-menu">
-                <svg  width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 1L21 21M1 21L21 1" stroke="black"/>
-                </svg>
+               <img class="menu-img" src="/resources/static/assets/close-btn.svg">
             </button>
 
             <nav class="navbar-menu">
@@ -155,12 +160,7 @@
             </nav>
         </div>
         <button class="menu-button">
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0.937476 9.37501H29.0624C29.58 9.37501 29.9999 8.95498 29.9999 8.43754C29.9999 7.92002 29.5799 7.50006 29.0624 7.50006H0.937476C0.419955 7.50006 0 7.92009 0 8.43754C0 8.95498 0.420033 9.37501 0.937476 9.37501Z" fill="black"/>
-                <path d="M29.0624 14.0626H0.937476C0.419955 14.0626 0 14.4826 0 15C0 15.5175 0.420033 15.9375 0.937476 15.9375H29.0624C29.58 15.9375 29.9999 15.5175 29.9999 15C29.9999 14.4826 29.58 14.0626 29.0624 14.0626Z" fill="black"/>
-                <path d="M29.0625 20.625H10.3125C9.79495 20.625 9.375 21.0451 9.375 21.5625C9.375 22.08 9.79503 22.5 10.3125 22.5H29.0625C29.58 22.5 29.9999 22.0799 29.9999 21.5625C30 21.045 29.58 20.625 29.0625 20.625Z" fill="black"/>
-            </svg>
-
+            <img class="menu-img" src="/resources/static/assets/burger.svg">
         </button>
     </div>
 </div>
