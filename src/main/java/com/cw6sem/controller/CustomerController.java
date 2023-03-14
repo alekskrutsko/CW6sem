@@ -4,11 +4,10 @@ package com.cw6sem.controller;
 import com.cw6sem.domain.Status;
 import com.cw6sem.entity.AppraisalAgreement;
 import com.cw6sem.entity.ObjectToAppraise;
+import com.cw6sem.entity.User;
 import com.cw6sem.service.*;
 import com.cw6sem.validators.ErrorCase;
-import com.cw6sem.entity.User;
 import com.cw6sem.validators.Validation;
-import static com.cw6sem.validators.ErrorCase.errorMsg;
 import com.mysql.cj.util.StringUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.data.repository.query.Param;
@@ -20,6 +19,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static com.cw6sem.validators.ErrorCase.errorMsg;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/customer")
@@ -29,7 +30,6 @@ public class CustomerController {
     private final UserService userService;
     private final CustomerService customerService;
     private final AppraiserService appraiserService;
-    private final AdminService adminService;
     private final AppraisalAgreementService appraisalAgreementService;
     private final ObjectToAppraiseService objectToAppraiseService;
 

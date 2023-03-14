@@ -8,7 +8,6 @@ import com.cw6sem.entity.User;
 import com.cw6sem.service.*;
 import com.cw6sem.validators.ErrorCase;
 import com.cw6sem.validators.Validation;
-import static com.cw6sem.validators.ErrorCase.errorMsg;
 import com.mysql.cj.util.StringUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.cw6sem.validators.ErrorCase.errorMsg;
 
 
 

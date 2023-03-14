@@ -78,7 +78,7 @@ cursor: pointer;
     padding: 15px 30px;
     overflow: hidden;
     border: 2px solid;
-    border-bottom-width: 4px;
+    border-radius: 5px;
     font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
